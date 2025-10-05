@@ -24,7 +24,9 @@
             <h3 class="item-price mb-4">Rp {{ item.price|floatformat:0 }}</h3>
 
             <h4 class="detail-title mb-2">Deskripsi:</h4>
-            <p class="card-text item-description">{{ item.description }}</p>
+            <p class="card-text item-description text-justify">
+              {{ item.description }}
+            </p>
 
             <div class="quantity-box mt-4">
               <label for="quantity" class="form-label">Kuantitas:</label>

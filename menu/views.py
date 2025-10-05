@@ -1,15 +1,23 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Category, ListMenu # Import model
+from django.db.models import Q 
 
 def list_menu(request):
         # Ambil semua objek kategori dan item menu dari database
     categories = Category.objects.all()
+    
+    query = request.GET.get('q')
     list_menus = ListMenu.objects.all()
+    if query:
+        list_menus = list_menus.filter(
+            Q(name__icontains=query) | Q(description__icontains=query)
+        )
     
         # Kirim data tersebut ke template melalui dictionary 'context'
     context = {
         'categories': categories,
         'list_menus': list_menus,
+        'query':query,
     }
     return render(request, 'menu/menu.html', context)
 

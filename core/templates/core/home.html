@@ -264,7 +264,7 @@ section yang besar di halaman utama #} {% block hero_section %}
               </a>
                 <div class="detail-box">
                   <h5>{{ list_menu.name }}</h5>
-                  <p>{{ list_menu.description }}</p>
+                  <p>{{ list_menu.description|truncatechars:50 }}</p>
                   <div class="options">
                     <h6>Rp {{ list_menu.price|floatformat:0 }}</h6>
                     <a href="">
@@ -283,7 +283,7 @@ section yang besar di halaman utama #} {% block hero_section %}
         </div>
       </div>
       <div class="btn-box">
-        <a href=""> View More </a>
+        <a href=""> Lihat Selengkapnya </a>
       </div>
     </div>
   </section>
