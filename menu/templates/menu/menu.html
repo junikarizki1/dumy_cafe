@@ -14,15 +14,20 @@
     <div class="filters-content">
       <div class="row grid">
         {% for list_menu in list_menus %}
-        <div class="col-sm-6 col-lg-4 all {{ item.category.slug }}">
+        <div class="col-sm-6 col-lg-4 all {{ list_menu.category.slug }}">
           <div class="box">
             <div>
-              <div class="img-box">
-                <img
-                  src="{{ list_menu.image.url }}"
-                  alt="{{ list_menu.name }}"
-                />
-              </div>
+              <a
+                href="{% url 'menu:menu_detail' menu_slug=list_menu.slug %}"
+                class="menu-item-link"
+              >
+                <div class="img-box">
+                  <img
+                    src="{{ list_menu.image.url }}"
+                    alt="{{ list_menu.name }}"
+                  />
+                </div>
+              </a>
               <div class="detail-box">
                 <h5>{{ list_menu.name }}</h5>
                 <p>{{ list_menu.description }}</p>
@@ -30,7 +35,7 @@
                   <h6>Rp {{ list_menu.price|floatformat:0 }}</h6>
                   <a href="">
                     <img
-                      src="{% static 'images/icons/cart.png' %}"
+                      src="{% static 'images/icons/hood.png' %}"
                       alt="cart"
                       class="social-icon"
                     />

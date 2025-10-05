@@ -13,6 +13,7 @@ class Category(models.Model):
 
 class ListMenu(models.Model):
     name = models.CharField(max_length=100)
+    slug = models.SlugField(unique=True, help_text="Teks unik untuk URL, akan terisi otomatis jika dikosongkan.")
     description = models.TextField()
     image = models.ImageField(upload_to='menu_images/')
     price = models.DecimalField(max_digits=8, decimal_places=2)

@@ -1008,4 +1008,161 @@ a:focus {
 .footer_section .footer-info p a {
   color: inherit;
 }
+
+/* Custom Card Styling for Detail Page */
+.custom-detail-card {
+  border: none;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05);
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+/* Image box for main product detail - with dark background */
+.img-box-detail {
+  background-color: #222831; /* Darker background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px; /* Add some padding around the image */
+  border-radius: 10px; /* Slightly rounded corners for the box */
+  max-height: 450px; /* Limit height */
+  overflow: hidden; /* Hide overflow if image is too large */
+}
+
+.img-box-detail img {
+  max-width: 100%;
+  max-height: 100%; /* Ensure image fits within the box */
+  object-fit: contain; /* Maintain aspect ratio without cropping */
+  border-radius: 8px; /* Slightly rounded corners for the image itself */
+}
+
+/* Text Styling (from previous suggestions, ensure they are present) */
+.card-title.item-name {
+  font-weight: bold;
+  color: #222831;
+  font-size: 2.2rem; /* Make it slightly larger */
+}
+.item-category {
+  font-size: 1.1rem;
+}
+.item-price {
+  font-weight: 600;
+  color: #ffbe33;
+  font-size: 2.8rem; /* Make price stand out more */
+  margin: 20px 0;
+}
+.detail-title {
+  color: #222831;
+  font-weight: 600;
+  font-size: 1.3rem;
+}
+.item-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+/* Quantity Box styling */
+.quantity-box .input-group {
+  width: 140px; /* Adjust width as needed */
+}
+.quantity-box .form-control {
+  border-color: #ced4da; /* Default Bootstrap border color */
+}
+.quantity-box .btn-outline-secondary {
+  color: #6c757d;
+  border-color: #6c757d;
+}
+.quantity-box .btn-outline-secondary:hover {
+  background-color: #ffbe33;
+  color: #fff;
+  border-color: #ffbe33;
+}
+
+/* Action Buttons */
+.action-buttons .btn1 {
+  /* Using btn1 from your existing template */
+  padding: 10px 25px;
+  font-size: 1.1rem;
+}
+.action-buttons .btn-outline-dark {
+  padding: 10px 25px;
+  font-size: 1.1rem;
+  border-radius: 25px; /* Match btn1 style */
+  border-color: #222831;
+  color: #222831;
+}
+.action-buttons .btn-outline-dark:hover {
+  background-color: #222831;
+  color: #fff;
+}
+
+/* Recommendation Section Styling */
+.recommendation_section .heading_container h2 {
+  font-size: 2.5rem;
+  color: #222831;
+}
+.custom-recommendation-box {
+  background-color: #fff;
+  border: none; /* Remove default card border */
+  box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.08); /* Lighter shadow */
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.2s ease-in-out;
+  height: 100%; /* Ensure consistent height */
+  display: flex;
+  flex-direction: column;
+}
+.custom-recommendation-box:hover {
+  transform: translateY(-5px); /* Lift effect on hover */
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+.img-box-rec {
+  height: 150px; /* Fixed height for consistency */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8f8f8; /* Light background for rec images */
+  overflow: hidden;
+}
+.img-box-rec img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* Ensure image fits */
+}
+.custom-recommendation-box .detail-box {
+  flex-grow: 1; /* Allow detail box to take remaining space */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.custom-recommendation-box .detail-box h5 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 5px;
+}
+.custom-recommendation-box .detail-box h6 {
+  font-size: 1rem;
+  color: #ffbe33;
+}
+.custom-recommendation-box .menu-item-link {
+  text-decoration: none; /* Remove underline for links */
+  color: inherit; /* Inherit color */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* General Layout Adjustments */
+.layout_padding {
+  padding-top: 90px;
+  padding-bottom: 90px;
+}
+.layout_padding-top {
+  padding-top: 90px;
+}
+.layout_padding-bottom {
+  padding-bottom: 90px;
+}
+
 /*# sourceMappingURL=style.css.map */

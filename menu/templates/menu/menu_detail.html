@@ -1,0 +1,107 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<section class="food_section layout_padding">
+  <div class="container">
+    <div class="card mb-5 custom-detail-card">
+      <div class="row g-0">
+        <div
+          class="col-md-6 d-flex align-items-center justify-content-center p-3"
+        >
+          <div class="img-box-detail">
+            <img
+              src="{{ item.image.url }}"
+              alt="{{ item.name }}"
+              class="img-fluid rounded-start"
+            />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card-body p-4">
+            <h2 class="card-title item-name">{{ item.name }}</h2>
+            <p class="card-text item-category text-muted">
+              Kategori: {{ item.category.name }}
+            </p>
+
+            <h3 class="item-price mb-4">Rp {{ item.price|floatformat:0 }}</h3>
+
+            <h4 class="detail-title mb-2">Deskripsi:</h4>
+            <p class="card-text item-description">{{ item.description }}</p>
+
+            <div class="quantity-box mt-4">
+              <label for="quantity" class="form-label">Kuantitas:</label>
+              <div class="input-group mb-3" style="width: 150px">
+                <button
+                  class="btn btn-outline-secondary"
+                  type="button"
+                  id="button-addon1"
+                >
+                  -
+                </button>
+                <input
+                  type="text"
+                  id="quantity"
+                  class="form-control text-center"
+                  value="1"
+                  readonly
+                />
+                <button
+                  class="btn btn-outline-secondary"
+                  type="button"
+                  id="button-addon2"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+            <div class="action-buttons mt-4 d-flex align-items-center">
+              <a
+                href="#"
+                class="btn btn-outline-warning rounded-pill px-4 mr-3"
+              >
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i> Tambah ke
+                Pesanan
+              </a>
+              <a href="#" class="btn btn-outline-danger rounded-pill px-4">
+                <i class="fa fa-home" aria-hidden="true"></i> Kembali ke Menu
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% if recommended_items %}
+    <div class="recommendation_section mt-5">
+      <div class="heading_container heading_center mb-4">
+        <h2>Produk Rekomendasi</h2>
+      </div>
+      <div class="row">
+        {% for rec_item in recommended_items %}
+        <div class="col-sm-6 col-lg-3 mb-4">
+          <div class="box custom-recommendation-box">
+            <a
+              href="{% url 'menu:menu_detail' menu_slug=rec_item.slug %}"
+              class="menu-item-link"
+            >
+              <div class="img-box-rec">
+                <img
+                  src="{{ rec_item.image.url }}"
+                  alt="{{ rec_item.name }}"
+                  class="img-fluid"
+                />
+              </div>
+              <div class="detail-box p-3">
+                <h5>{{ rec_item.name }}</h5>
+                <div class="options">
+                  <h6>Rp {{ rec_item.price|floatformat:0 }}</h6>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock content %}

@@ -67,3 +67,29 @@ $(".client_owl-carousel").owlCarousel({
     },
   },
 });
+
+$(document).ready(function () {
+  // === FUNGSI UNTUK TOMBOL KUANTITAS DI HALAMAN DETAIL ===
+
+  // Logika untuk tombol tambah (+)
+  $("#button-addon2").on("click", function () {
+    var input = $("#quantity");
+    var currentValue = parseInt(input.val());
+    input.val(currentValue + 1);
+  });
+
+  // Logika untuk tombol kurang (-)
+  $("#button-addon1").on("click", function () {
+    var input = $("#quantity");
+    var currentValue = parseInt(input.val());
+    // Pastikan kuantitas tidak kurang dari 1
+    if (currentValue > 1) {
+      input.val(currentValue - 1);
+    }
+  });
+
+  // Pastikan niceSelect juga diinisialisasi di dalam ready function jika belum
+  if ($("select").length) {
+    $("select").niceSelect();
+  }
+});
