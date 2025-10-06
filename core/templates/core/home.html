@@ -267,7 +267,7 @@ section yang besar di halaman utama #} {% block hero_section %}
                   <p>{{ list_menu.description|truncatechars:50 }}</p>
                   <div class="options">
                     <h6>Rp {{ list_menu.price|floatformat:0 }}</h6>
-                    <a href="">
+                    <a href="{% url 'menu:menu_detail' menu_slug=list_menu.slug %}">
                       <img
                         src="{% static 'images/icons/hood.png' %}"
                         alt="cart"

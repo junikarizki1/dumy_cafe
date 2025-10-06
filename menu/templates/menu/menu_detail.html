@@ -28,45 +28,26 @@
               {{ item.description }}
             </p>
 
-            <div class="quantity-box mt-4">
-              <label for="quantity" class="form-label">Kuantitas:</label>
-              <div class="input-group mb-3" style="width: 150px">
-                <button
-                  class="btn btn-outline-secondary"
-                  type="button"
-                  id="button-addon1"
-                >
-                  -
-                </button>
-                <input
-                  type="text"
-                  id="quantity"
-                  class="form-control text-center"
-                  value="1"
-                  readonly
-                />
-                <button
-                  class="btn btn-outline-secondary"
-                  type="button"
-                  id="button-addon2"
-                >
-                  +
-                </button>
+            <form method="POST" action="{% url 'order:add_to_cart' product_id=item.id %}">
+              {% csrf_token %} 
+              <div class="quantity-box mt-4">
+                <label for="quantity" class="form-label">Kuantitas:</label>
+                <div class="input-group mb-3" style="width: 150px;">
+                  <button class="btn btn-outline-secondary" type="button" id="button-addon1" onclick="changeQuantity(-1)">-</button>
+                  <input type="text" id="quantity" name="quantity" class="form-control text-center" value="1" readonly>
+                  <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="changeQuantity(1)">+</button>    
+                </div>
+            </div>
+          
+              <div class="action-buttons mt-4">
+                  <button type="submit" class="btn btn-outline-warning rounded-pill px-4 me-3">
+                      <i class="fa fa-cutlery" aria-hidden="true"></i> Tambah ke Pesanan
+                  </button>
+                  <a href="{% url 'menu:list_menu' %}" class="btn btn-outline-danger rounded-pill px-4">
+                      Kembali ke Menu
+                  </a>
               </div>
-            </div>
-            <div class="action-buttons mt-4 d-flex align-items-center">
-              <a
-                href="#"
-                class="btn btn-outline-warning rounded-pill px-4 mr-3"
-              >
-                <i class="fa fa-shopping-cart" aria-hidden="true"></i> Tambah ke
-                Pesanan
-              </a>
-              <a href="#" class="btn btn-outline-danger rounded-pill px-4">
-                <i class="fa fa-home" aria-hidden="true"></i> Kembali ke Menu
-              </a>
-            </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>

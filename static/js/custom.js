@@ -68,28 +68,28 @@ $(".client_owl-carousel").owlCarousel({
   },
 });
 
-$(document).ready(function () {
-  // === FUNGSI UNTUK TOMBOL KUANTITAS DI HALAMAN DETAIL ===
+// $(document).ready(function () {
+//   // === FUNGSI UNTUK TOMBOL KUANTITAS DI HALAMAN DETAIL ===
+//   // Pastikan niceSelect juga diinisialisasi di dalam ready function jika belum
+//   if ($("select").length) {
+//     $("select").niceSelect();
+//   }
 
-  // Logika untuk tombol tambah (+)
-  $("#button-addon2").on("click", function () {
-    var input = $("#quantity");
-    var currentValue = parseInt(input.val());
-    input.val(currentValue + 1);
-  });
+//   // Logika untuk tombol tambah (+)
+//   $("#button-addon2").on("click", function () {
+//     console.log("Tombol Tambah (+) diklik!"); // <-- TAMBAHKAN BARIS INI
+//     var input = $("#quantity");
+//     var currentValue = parseInt(input.val());
+//     input.val(currentValue + 1);
+//   });
 
-  // Logika untuk tombol kurang (-)
-  $("#button-addon1").on("click", function () {
-    var input = $("#quantity");
-    var currentValue = parseInt(input.val());
-    // Pastikan kuantitas tidak kurang dari 1
-    if (currentValue > 1) {
-      input.val(currentValue - 1);
-    }
-  });
-
-  // Pastikan niceSelect juga diinisialisasi di dalam ready function jika belum
-  if ($("select").length) {
-    $("select").niceSelect();
-  }
-});
+//   // Logika untuk tombol kurang (-)
+//   $("#button-addon1").on("click", function () {
+//     console.log("Tombol Kurang (-) diklik!"); // <-- Anda juga bisa tambahkan ini
+//     var input = $("#quantity");
+//     var currentValue = parseInt(input.val());
+//     if (currentValue > 1) {
+//       input.val(currentValue - 1);
+//     }
+//   });
+// });

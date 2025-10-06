@@ -1165,4 +1165,21 @@ a:focus {
   padding-bottom: 90px;
 }
 
+/* Styling untuk gambar produk di halaman keranjang */
+.cart-product-img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain; /* <-- Ini solusinya */
+  border-radius: 8px;
+  background-color: #f8f9fa; /* Opsional: beri latar belakang agar tidak kosong */
+}
+.menu-item-link {
+  text-decoration: none;
+  color: inherit;
+  font-weight: 600;
+}
+.menu-item-link:hover {
+  color: #ffbe33;
+}
+
 /*# sourceMappingURL=style.css.map */

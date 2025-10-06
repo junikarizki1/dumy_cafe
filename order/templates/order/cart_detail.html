@@ -1,0 +1,94 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<section class="food_section layout_padding">
+  <div class="container">
+    <div class="heading_container heading_center mb-4">
+      <h2>Daftar Pesanan Anda</h2>
+    </div>
+
+    {% if cart_items %}
+    <div class="row">
+      <div class="col-md-12">
+        <div class="table-responsive">
+          <table class="table table-hover align-middle">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Nama</th>
+                <th scope="col">Harga</th>
+                <th scope="col" class="text-center">Qty</th>
+                <th scope="col" class="text-right">Subtotal</th>
+                <th scope="col" class="text-center">Hapus</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for item in cart_items %}
+              <tr>
+                <td>
+                  <div class="d-flex align-items-center">
+                    <img
+                      src="{{ item.product.image.url }}"
+                      alt="{{ item.product.name }}"
+                      class="cart-product-img mr-3"
+                    />
+                    <a
+                      href="{% url 'menu:menu_detail' menu_slug=item.product.slug %}"
+                      class="menu-item-link"
+                    >
+                      {{ item.product.name }}
+                    </a>
+                  </div>
+                </td>
+                <td>Rp {{ item.price|floatformat:0 }}</td>
+                <td class="text-center">{{ item.quantity }}</td>
+                <td class="text-right">Rp {{ item.subtotal|floatformat:0 }}</td>
+                <td class="text-center">
+                  <a
+                    href="{% url 'order:cart_remove' product_id=item.product.id %}"
+                    class="btn btn-sm btn-danger"
+                  >
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                  </a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tfoot>
+              <tr class="table-light">
+                <th colspan="3" class="text-center">Total Keseluruhan</th>
+                <th class="text-center font-weight-bold">
+                  Rp {{ total_price|floatformat:0 }}
+                </th>
+                <th></th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-md-12 d-flex justify-content-end">
+        <a
+          href="{% url 'menu:list_menu' %}"
+          class="btn btn-outline-danger mr-2"
+        >
+          Kembali
+        </a>
+        <a href="#" class="btn btn-outline-warning">
+          <i class="fa fa-money" aria-hidden="true"></i> Pesan Sekarang
+        </a>
+      </div>
+    </div>
+    {% else %}
+    <div class="row">
+      <div class="col-12 text-center py-5">
+        <p class="lead">Pesanan Anda masih kosong.</p>
+        <a
+          href="{% url 'menu:list_menu' %}"
+          class="btn btn-outline-warning mt-3"
+          >Ayo Cari Menu</a
+        >
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock content %}
