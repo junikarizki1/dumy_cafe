@@ -247,7 +247,7 @@ section yang besar di halaman utama #} {% block hero_section %}
       </ul>
       <div class="filters-content">
         <div class="row grid">
-          {% for list_menu in list_menus %}
+          {% for list_menu in list_menus|slice:":6" %}
           <div class="col-sm-6 col-lg-4 all {{ list_menu.category.slug }}">
             <div class="box">
               <div>
@@ -283,7 +283,7 @@ section yang besar di halaman utama #} {% block hero_section %}
         </div>
       </div>
       <div class="btn-box">
-        <a href=""> Lihat Selengkapnya </a>
+        <a href="{% url 'menu:list_menu' %}"> Lihat Selengkapnya </a>
       </div>
     </div>
   </section>

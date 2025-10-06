@@ -11,7 +11,9 @@ def list_menu(request):
     if query:
         list_menus = list_menus.filter(
             Q(name__icontains=query) | Q(description__icontains=query)
-        )
+        ). order_by('name')
+    else:
+        list_menus = ListMenu.objects.all().order_by('name')
     
         # Kirim data tersebut ke template melalui dictionary 'context'
     context = {

@@ -4,7 +4,7 @@ from menu.models import Category, ListMenu
 
 def home(request):
     categories = Category.objects.all()
-    list_menus = ListMenu.objects.all()
+    list_menus = ListMenu.objects.all().order_by('name')
     context = {
         'categories': categories,
         'list_menus': list_menus,}

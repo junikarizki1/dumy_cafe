@@ -88,16 +88,6 @@
               </li>
             </ul>
             <div class="user_option">
-              <a href="#" class="user_link">
-                <i class="fa fa-user-circle" aria-hidden="true"></i>
-              </a>
-              <a class="cart_link" href="#">
-                <img
-                  src="{% static 'images/icons/hoodw.png' %}"
-                  alt="cart"
-                  class="social-icon"
-                />
-              </a>
               <form
                 method="GET"
                 action="{% url 'menu:list_menu' %}"
@@ -120,6 +110,16 @@
                   </button>
                 </div>
               </form>
+              <a class="cart_link" href="#">
+                <img
+                  src="{% static 'images/icons/hoodw.png' %}"
+                  alt="cart"
+                  class="social-icon"
+                />
+              </a>
+              <a href="#" class="user_link">
+                <i class="fa fa-user-circle" aria-hidden="true"></i>
+              </a>
             </div>
           </div>
         </nav>
