@@ -7,11 +7,23 @@ class Order(models.Model):
     class OrderType(models.TextChoices):
         DINE_IN = 'Dine-In', 'Dine-In'
         TAKEAWAY = 'Takeaway', 'Takeaway'
+    
+    class PaymentMethod(models.TextChoices):
+        CASH = 'Cash', 'Bayar di Kasir'
+        QRIS = 'QRIS', 'QRIS'
+    
+    class OrderStatus(models.TextChoices):
+        PENDING = 'Pending', 'Menunggu Pembayaran'
+        WAITING_CONFIRMATION = 'Waiting Confirmation', 'Menunggu Konfirmasi'
+        PAID = 'Paid', 'Lunas'
+        CANCELED = 'Canceled', 'Dibatalkan'
 
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True) # Siapa yang memesan
     order_type = models.CharField(max_length=10, choices=OrderType.choices, default=OrderType.DINE_IN)
     table_number = models.CharField(max_length=5, null=True, blank=True) # Nomor meja jika dine-in
-    
+    payment_method = models.CharField(max_length=10, choices=PaymentMethod.choices, default=PaymentMethod.CASH)
+    status = models.CharField(max_length=25, choices=OrderStatus.choices, default=OrderStatus.PENDING)
+    payment_proof = models.ImageField(upload_to='payment_proofs/', null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True) # Kapan pesanan dibuat
     is_paid = models.BooleanField(default=False) # Status pembayaran
     
