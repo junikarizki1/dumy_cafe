@@ -1182,4 +1182,24 @@ a:focus {
   color: #ffbe33;
 }
 
+/* 1. Menghilangkan panah bawah (caret) di samping ikon user */
+.user_link.dropdown-toggle::after {
+  display: none;
+}
+
+/* 2. Menambahkan margin dan memposisikan dropdown di tengah ikon */
+.user_option .dropdown-menu {
+  margin-top: 30px; /* Memberi jarak dari navbar */
+  left: 50%; /* Posisikan sisi kiri dropdown di tengah ikon */
+  transform: translateX(
+    -50%
+  ); /* Geser dropdown ke kiri sebesar 50% dari lebarnya sendiri */
+}
+
+/* 2. Mengubah efek hover pada item di dalam dropdown */
+.dropdown-menu .dropdown-item:hover,
+.dropdown-menu .dropdown-item:focus {
+  background-color: transparent; /* Menghilangkan latar belakang putih */
+}
+
 /*# sourceMappingURL=style.css.map */

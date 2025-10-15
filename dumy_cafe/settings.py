@@ -32,6 +32,8 @@ INSTALLED_APPS = [
     'core',
     'menu',
     'order',
+    'users',
+    'dashboard',
 ]
 
 MIDDLEWARE = [
@@ -56,6 +58,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'order.context_processors.cart_item_count',
             ],
         },
     },
@@ -127,3 +130,6 @@ MEDIA_ROOT = BASE_DIR / 'media'
 MESSAGE_TAGS = {
     messages.ERROR: 'danger',
 }
+
+LOGIN_REDIRECT_URL = 'home' # Arahkan ke halaman utama setelah login
+LOGOUT_REDIRECT_URL = 'home' # Arahkan ke halaman utama setelah logout

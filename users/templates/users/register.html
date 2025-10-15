@@ -1,0 +1,25 @@
+{% extends 'base.html' %} {% block content %}
+<section class="book_section layout_padding">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <div class="heading_container">
+          <h2>Registrasi Akun Baru</h2>
+        </div>
+        <div class="form_container">
+          <form method="POST">
+            {% csrf_token %} {{ form.as_p }}
+            <div class="btn_box">
+              <button type="submit">Daftar</button>
+            </div>
+          </form>
+          <small class="text-muted mt-3 d-block">
+            Sudah punya akun?
+            <a href="{% url 'users:login' %}">Login di sini</a>
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}

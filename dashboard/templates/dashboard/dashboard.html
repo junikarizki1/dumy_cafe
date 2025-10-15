@@ -1,0 +1,51 @@
+{% extends 'base.html' %} {% load static %} {% load humanize %} {% block content
+%}
+<section class="food_section layout_padding">
+  <div class="container">
+    <div class="heading_container heading_center mb-5">
+      <h2>Dasbor Pesanan Masuk</h2>
+    </div>
+
+    <div class="row">
+      {% for order in orders %}
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card h-100">
+          <div class="card-header d-flex justify-content-between">
+            <strong>Order #{{ order.id }}</strong>
+            <span
+              class="badge {% if order.status == 'Waiting Confirmation' %}badge-warning{% else %}badge-success{% endif %}"
+            >
+              {{ order.get_status_display }}
+            </span>
+          </div>
+          <div class="card-body">
+            <p><strong>Waktu:</strong> {{ order.created_at|date:"H:i" }}</p>
+            <p>
+              <strong>Tipe:</strong> {{ order.order_type }} {% if
+              order.table_number %}(Meja {{ order.table_number }}){% endif %}
+            </p>
+            <hr />
+            <ul class="list-unstyled">
+              {% for item in order.items.all %}
+              <li>{{ item.quantity }}x {{ item.product.name }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+          <div class="card-footer text-center">
+            {% if order.status == 'Waiting Confirmation' %}
+            <a href="#" class="btn btn-primary btn-sm">Verifikasi Pembayaran</a>
+            {% else %}
+            <a href="#" class="btn btn-info btn-sm">Selesaikan Pesanan</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <div class="col-12 text-center">
+        <p class="lead">Tidak ada pesanan aktif saat ini.</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock content %}
