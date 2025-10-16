@@ -16,6 +16,8 @@ class Order(models.Model):
         PENDING = 'Pending', 'Menunggu Pembayaran'
         WAITING_CONFIRMATION = 'Waiting Confirmation', 'Menunggu Konfirmasi'
         PAID = 'Paid', 'Lunas'
+        PROCESSING = 'Processing', 'Sedang Disiapkan'
+        COMPLETED = 'Completed', 'Selesai'
         CANCELED = 'Canceled', 'Dibatalkan'
 
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True) # Siapa yang memesan

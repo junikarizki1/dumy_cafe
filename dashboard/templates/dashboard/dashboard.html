@@ -1,51 +1,120 @@
-{% extends 'base.html' %} {% load static %} {% load humanize %} {% block content
-%}
-<section class="food_section layout_padding">
-  <div class="container">
-    <div class="heading_container heading_center mb-5">
-      <h2>Dasbor Pesanan Masuk</h2>
-    </div>
+{% extends 'dashboard/dashboard_base.html' %} {% load static %} {% load humanize
+%} {% block page_title %} Pesanan Masuk {% endblock %} {% block breadcrumb %}
+Pesanan Masuk {% endblock breadcrumb %} {% block content %}
 
-    <div class="row">
-      {% for order in orders %}
-      <div class="col-md-6 col-lg-4 mb-4">
-        <div class="card h-100">
-          <div class="card-header d-flex justify-content-between">
-            <strong>Order #{{ order.id }}</strong>
-            <span
-              class="badge {% if order.status == 'Waiting Confirmation' %}badge-warning{% else %}badge-success{% endif %}"
-            >
-              {{ order.get_status_display }}
-            </span>
-          </div>
-          <div class="card-body">
-            <p><strong>Waktu:</strong> {{ order.created_at|date:"H:i" }}</p>
-            <p>
-              <strong>Tipe:</strong> {{ order.order_type }} {% if
-              order.table_number %}(Meja {{ order.table_number }}){% endif %}
-            </p>
-            <hr />
-            <ul class="list-unstyled">
-              {% for item in order.items.all %}
-              <li>{{ item.quantity }}x {{ item.product.name }}</li>
-              {% endfor %}
-            </ul>
-          </div>
-          <div class="card-footer text-center">
-            {% if order.status == 'Waiting Confirmation' %}
-            <a href="#" class="btn btn-primary btn-sm">Verifikasi Pembayaran</a>
-            {% else %}
-            <a href="#" class="btn btn-info btn-sm">Selesaikan Pesanan</a>
-            {% endif %}
-          </div>
-        </div>
+<div class="card mb-4">
+  <div class="card-body">
+    <form
+      method="GET"
+      action="{% url 'dashboard:main' %}"
+      class="row align-items-end"
+    >
+      <div class="col-md-4">
+        <label for="tanggal" class="form-label"
+          >Filter Berdasarkan Tanggal:</label
+        >
+        <input
+          type="date"
+          name="tanggal"
+          id="tanggal"
+          class="form-control"
+          value="{{ selected_date }}"
+        />
       </div>
-      {% empty %}
-      <div class="col-12 text-center">
-        <p class="lead">Tidak ada pesanan aktif saat ini.</p>
+      <div class="col-md-4">
+        <button type="submit" class="btn btn-primary">Filter</button>
+        <a href="{% url 'dashboard:main' %}" class="btn btn-secondary ms-2"
+          >Reset</a
+        >
       </div>
-      {% endfor %}
+    </form>
+  </div>
+</div>
+
+<div class="row">
+  {% for order in orders %}
+  <div class="col-md-6 col-lg-4 mb-4">
+    <div class="card h-100 shadow-sm">
+      <div class="card-header d-flex justify-content-between">
+        <strong class="text-primary">Order #{{ order.id }}</strong>
+        <span
+          class="badge {% if order.status == 'Completed' %}bg-success {% elif order.status == 'Paid' %}bg-success {% elif order.status == 'Processing' %}bg-info {% elif order.status == 'Waiting Confirmation' %}bg-warning {% elif order.status == 'Canceled' %}bg-danger {% else %}bg-secondary {% endif %}"
+        >
+          {{ order.get_status_display }}
+        </span>
+      </div>
+
+      <div class="card-body">
+        <p><strong>Waktu:</strong> {{ order.created_at|date:"d M Y, H:i" }}</p>
+        <p><strong>Pelanggan:</strong> {{ order.user.username }}</p>
+        <p>
+          <strong>Pembayaran:</strong> {{ order.get_payment_method_display }}
+        </p>
+        <p><strong>Tipe:</strong> {{ order.order_type }}</p>
+        <p><strong>Meja:</strong> {{order.table_number }}</p>
+        <hr />
+        <p><strong>Item Pesanan:</strong></p>
+        <ul class="list-unstyled">
+          {% for item in order.items.all %}
+          <li>{{ item.quantity }}x {{ item.product.name }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="card-footer text-center">
+        {% if order.status == 'Waiting Confirmation' %}
+        <a
+          href="{% url 'dashboard:order_detail' order_id=order.id %}"
+          class="btn btn-primary btn-sm"
+          >Verifikasi Pembayaran</a
+        >
+
+        {% elif order.status == 'Pending' and order.payment_method == 'Cash' %}
+        <form
+          action="{% url 'dashboard:mark_as_paid' order_id=order.id %}"
+          method="POST"
+          class="d-inline"
+        >
+          {% csrf_token %}
+          <button type="submit" class="btn btn-success btn-sm">
+            Tandai Lunas (Cash)
+          </button>
+        </form>
+
+        {% elif order.status == 'Paid' %}
+        <form
+          action="{% url 'dashboard:process_order' order_id=order.id %}"
+          method="POST"
+          class="d-inline"
+        >
+          {% csrf_token %}
+          <button type="submit" class="btn btn-info btn-sm">
+            Proses Pesanan
+          </button>
+        </form>
+
+        {% elif order.status == 'Processing' %}
+        <form
+          action="{% url 'dashboard:complete_order' order_id=order.id %}"
+          method="POST"
+          class="d-inline"
+        >
+          {% csrf_token %}
+          <button type="submit" class="btn btn-success btn-sm">
+            Tandai Selesai
+          </button>
+        </form>
+
+        {% else %}
+        <span class="text-muted">Tidak ada aksi</span>
+        {% endif %}
+      </div>
     </div>
   </div>
-</section>
+  {% empty %}
+  <div class="col-12 text-center">
+    <div class="alert alert-info">Belum ada pesanan yang masuk.</div>
+  </div>
+  {% endfor %}
+</div>
 {% endblock content %}

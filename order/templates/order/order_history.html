@@ -17,7 +17,7 @@
           >
         </div>
         <span
-          class="badge {% if order.status == 'Paid' %}badge-success{% elif order.status == 'Waiting Confirmation' %}badge-warning{% else %}badge-secondary{% endif %}"
+          class="badge {% if order.status == 'Completed' %}bg-success {% elif order.status == 'Paid' %}bg-success {% elif order.status == 'Processing' %}bg-info {% elif order.status == 'Waiting Confirmation' %}bg-warning {% elif order.status == 'Canceled' %}bg-danger {% else %}bg-secondary {% endif %}"
         >
           {{ order.get_status_display }}
         </span>
